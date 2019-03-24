@@ -2,9 +2,9 @@
 
 # This script downloads and builds Bazel from source. It assumes
 # Bazel's build dependencies, documented in prep.sh, are already
-# present and the system has enough ram (physical or swap) to actually
-# build bazel. Building Bazel is resource intensive. This script takes
-# on the order of 3.5 hours to run on a Rasberry Pi 3.
+# present and the system has enough memory (physical or swap) to
+# actually build bazel. Building Bazel is resource intensive. This
+# script takes on the order of 3.5 hours to run on a Rasberry Pi 3.
 
 # Configure Bazel package download URLs. This should be the "ready to
 # compile" *-dist.zip package from the GitHub releases page.
