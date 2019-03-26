@@ -16,6 +16,24 @@ download_sha1sum="e6814afeb5d379d436c244c72f2786f62052a5bb"
 
 output_dir="$(dirname $(realpath $0))"
 
+# Install Ubuntu/Debian dependencies. This will call sudo for
+# privilege escalation if any package is missing.
+packages=(
+    autoconf
+    automake
+    default-jdk-headless
+    g++
+    libtool
+    pkg-config
+    unzip
+    zip
+    zlib1g-dev
+)
+
+if ! dpkg -s "${packages[@]}" &> /dev/null; then
+    sudo apt-get install -y --no-upgrade "${packages[@]}"
+fi
+
 # Create a temporary directory to contain any mess. This is not
 # required.
 tmp_workspace=$(mktemp --tmpdir -d compile_bazel_XXXXXXXX)
@@ -41,4 +59,4 @@ time {
 # The previous command builds a self-contained binary. Copy it out of
 # the workspace.
 ln -f bazel "${output_dir}/bazel"
-ln bazel "${output_dir}/bazel-$(date --utc +%Y%m%d_%H%M%S)"
+ln bazel "${output_dir}/bazel-binary-$(date --utc +%Y%m%d_%H%M%S)"
